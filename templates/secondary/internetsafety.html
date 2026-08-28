@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Internet Safety | IT-EvoLearn</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Inter",Arial,sans-serif;
+    background:#f6f8ff;
+    color:#172554;
+    overflow-x:hidden;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar{
+    background:#0f172a;
+    padding:16px 0;
+    box-shadow:0 5px 25px rgba(15,23,42,0.15);
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.navbar-brand{
+    font-size:24px;
+    font-weight:800;
+    color:#ffffff !important;
+}
+
+.navbar-brand i{
+    color:#67e8f9;
+    margin-right:8px;
+}
+
+.navbar-brand span{
+    color:#67e8f9;
+}
+
+
+/* =====================================================
+   BACK DASHBOARD
+===================================================== */
+
+.back-btn{
+    color:#cbd5e1 !important;
+    text-decoration:none;
+    font-weight:600;
+    transition:0.3s ease;
+}
+
+.back-btn:hover{
+    color:#67e8f9 !important;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.chapter-hero{
+    padding:75px 0 70px;
+    position:relative;
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 90% 15%,
+            rgba(103,232,249,0.25),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(139,92,246,0.18),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #f8fbff,
+            #eef2ff
+        );
+}
+
+
+/* Decorative circles */
+
+.chapter-hero::before{
+    content:"";
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    border-radius:50%;
+
+    background:rgba(99,102,241,0.06);
+
+    top:-150px;
+    right:-80px;
+}
+
+.chapter-hero::after{
+    content:"";
+    position:absolute;
+
+    width:200px;
+    height:200px;
+
+    border-radius:50%;
+
+    background:rgba(6,182,212,0.06);
+
+    bottom:-100px;
+    left:-70px;
+}
+
+
+/* =====================================================
+   HERO CONTENT
+===================================================== */
+
+.chapter-content{
+    position:relative;
+    z-index:2;
+}
+
+.chapter-badge{
+    display:inline-flex;
+
+    align-items:center;
+    gap:8px;
+
+    background:#e0f2fe;
+
+    color:#0369a1;
+
+    padding:9px 17px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+
+    border:1px solid #bae6fd;
+}
+
+.chapter-badge i{
+    color:#0ea5e9;
+}
+
+.chapter-content h1{
+    font-size:52px;
+
+    line-height:1.1;
+
+    font-weight:800;
+
+    color:#172554;
+
+    margin-bottom:18px;
+
+    letter-spacing:-1px;
+}
+
+.chapter-content h1 span{
+    color:#6366f1;
+}
+
+.chapter-content p{
+    color:#64748b;
+
+    font-size:17px;
+
+    line-height:1.8;
+
+    max-width:650px;
+
+    margin-bottom:25px;
+}
+
+
+/* =====================================================
+   CHAPTER VISUAL
+===================================================== */
+
+.chapter-visual{
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:250px;
+}
+
+.visual-card{
+    width:270px;
+    height:220px;
+
+    background:rgba(255,255,255,0.90);
+
+    border:1px solid #e2e8f0;
+
+    border-radius:25px;
+
+    box-shadow:0 20px 45px rgba(30,41,59,0.12);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    position:relative;
+
+    z-index:2;
+}
+
+.visual-icon{
+    width:75px;
+    height:75px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:linear-gradient(
+        135deg,
+        #dbeafe,
+        #e0f2fe
+    );
+
+    color:#2563eb;
+
+    font-size:34px;
+
+    margin-bottom:15px;
+}
+
+.visual-card h4{
+    font-weight:800;
+
+    color:#172554;
+
+    margin-bottom:5px;
+}
+
+.visual-card p{
+    font-size:13px;
+
+    color:#64748b;
+
+    margin:0;
+}
+
+
+/* =====================================================
+   FLOATING ICONS
+===================================================== */
+
+.floating-icon{
+    position:absolute;
+
+    width:48px;
+    height:48px;
+
+    border-radius:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:19px;
+
+    box-shadow:0 10px 25px rgba(30,41,59,0.12);
+
+    animation:float 3s ease-in-out infinite;
+}
+
+.floating-one{
+    top:15px;
+    left:20px;
+
+    background:#ede9fe;
+
+    color:#7c3aed;
+}
+
+.floating-two{
+    bottom:20px;
+    right:10px;
+
+    background:#dcfce7;
+
+    color:#16a34a;
+
+    animation-delay:0.8s;
+}
+
+@keyframes float{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+
+/* =====================================================
+   FEATURES SECTION
+===================================================== */
+
+.features-section{
+    padding:80px 0;
+
+    background:#ffffff;
+}
+
+
+/* =====================================================
+   SECTION HEADING
+===================================================== */
+
+.section-heading{
+    text-align:center;
+
+    margin-bottom:45px;
+}
+
+.section-label{
+    display:inline-block;
+
+    color:#6366f1;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    letter-spacing:1.5px;
+
+    margin-bottom:10px;
+}
+
+.section-heading h2{
+    font-size:38px;
+
+    font-weight:800;
+
+    color:#172554;
+
+    margin-bottom:12px;
+}
+
+.section-heading h2 span{
+    color:#6366f1;
+}
+
+.section-heading p{
+    color:#64748b;
+
+    max-width:650px;
+
+    margin:auto;
+
+    font-size:15px;
+
+    line-height:1.7;
+}
+
+
+/* =====================================================
+   FEATURE CARDS
+===================================================== */
+
+.feature-card{
+    background:#ffffff;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:22px;
+
+    padding:32px;
+
+    height:100%;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:0.35s ease;
+}
+
+.feature-card::after{
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    background:rgba(99,102,241,0.05);
+
+    right:-50px;
+    bottom:-50px;
+}
+
+.feature-card:hover{
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 45px rgba(30,41,59,0.11);
+
+    border-color:#c7d2fe;
+}
+
+
+/* =====================================================
+   FEATURE ICONS
+===================================================== */
+
+.feature-icon{
+    width:62px;
+    height:62px;
+
+    border-radius:17px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:24px;
+
+    margin-bottom:22px;
+}
+
+.feature-icon.blue{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.feature-icon.purple{
+    background:#ede9fe;
+    color:#7c3aed;
+}
+
+.feature-icon.cyan{
+    background:#cffafe;
+    color:#0891b2;
+}
+
+
+/* =====================================================
+   CARD CONTENT
+===================================================== */
+
+.feature-card h4{
+    color:#172554;
+
+    font-weight:800;
+
+    margin-bottom:10px;
+}
+
+.feature-card p{
+    color:#64748b;
+
+    font-size:14px;
+
+    line-height:1.7;
+
+    margin-bottom:20px;
+}
+
+
+/* =====================================================
+   CARD LINK
+===================================================== */
+
+.feature-link{
+    color:#4f46e5;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    position:relative;
+
+    z-index:2;
+}
+
+.feature-link i{
+    margin-left:6px;
+
+    transition:0.3s ease;
+}
+
+.feature-card:hover .feature-link i{
+    transform:translateX(5px);
+}
+
+
+/* =====================================================
+   INFORMATION
+===================================================== */
+
+.info-section{
+    padding:75px 0;
+
+    background:#eef2ff;
+}
+
+.info-box{
+    background:#ffffff;
+
+    border-radius:25px;
+
+    padding:35px;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:0 15px 35px rgba(30,41,59,0.07);
+}
+
+.info-box h3{
+    color:#172554;
+
+    font-weight:800;
+
+    margin-bottom:12px;
+}
+
+.info-box p{
+    color:#64748b;
+
+    font-size:14px;
+
+    line-height:1.8;
+
+    margin:0;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+    background:#0f172a;
+
+    color:#94a3b8;
+
+    padding:35px 0;
+}
+
+.footer-brand{
+    color:#ffffff;
+
+    font-size:20px;
+
+    font-weight:800;
+
+    text-decoration:none;
+}
+
+.footer-brand i{
+    color:#67e8f9;
+
+    margin-right:7px;
+}
+
+footer p{
+    margin:8px 0 0;
+
+    font-size:13px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:991px){
+
+    .chapter-content{
+        text-align:center;
+
+        margin-bottom:45px;
+    }
+
+    .chapter-content p{
+        margin-left:auto;
+
+        margin-right:auto;
+    }
+
+    .back-btn{
+        margin-bottom:10px;
+
+        display:inline-block;
+    }
+}
+
+
+@media(max-width:767px){
+
+    .chapter-hero{
+        padding:60px 0;
+    }
+
+    .chapter-content h1{
+        font-size:39px;
+    }
+
+    .section-heading h2{
+        font-size:30px;
+    }
+
+    .chapter-visual{
+        min-height:220px;
+    }
+
+    .feature-card{
+        padding:28px;
+    }
+}
+
+
+@media(max-width:480px){
+
+    .chapter-content h1{
+        font-size:33px;
+    }
+
+    .visual-card{
+        width:240px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar navbar-dark">
+
+    <div class="container">
+
+        <a
+            class="navbar-brand"
+            href="{{ url_for('home') }}">
+
+            <i class="fa-solid fa-brain"></i>
+
+            IT-Evo<span>Learn</span>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('secondary') }}"
+            class="back-btn">
+
+            <i class="fa-solid fa-arrow-left me-2"></i>
+
+            Back to Dashboard
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="chapter-hero">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+
+            <!-- LEFT -->
+
+            <div class="col-lg-7">
+
+                <div class="chapter-content">
+
+                    <div class="chapter-badge">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        SECONDARY • LEVEL 01
+
+                    </div>
+
+
+                    <h1>
+
+                        Internet
+
+                        <span>Safety.</span>
+
+                    </h1>
+
+
+                    <p>
+
+                        Learn how to stay safe, responsible and
+                        protected while using the internet.
+                        Understand online privacy, cyber threats,
+                        secure browsing and responsible digital
+                        behaviour with AI-powered learning tools.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RIGHT -->
+
+            <div class="col-lg-5">
+
+                <div class="chapter-visual">
+
+
+                    <div class="floating-icon floating-one">
+
+                        <i class="fa-solid fa-brain"></i>
+
+                    </div>
+
+
+                    <div class="floating-icon floating-two">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                    </div>
+
+
+                    <div class="visual-card">
+
+                        <div class="visual-icon">
+
+                            <i class="fa-solid fa-shield-halved"></i>
+
+                        </div>
+
+                        <h4>
+                            Internet Safety
+                        </h4>
+
+                        <p>
+                            Learn • Practice • Ask • Improve
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     AI FEATURES
+===================================================== -->
+
+<section class="features-section">
+
+    <div class="container">
+
+
+        <div class="section-heading">
+
+            <div class="section-label">
+
+                AI LEARNING TOOLS
+
+            </div>
+
+
+            <h2>
+
+                Choose How You Want to
+
+                <span>Learn.</span>
+
+            </h2>
+
+
+            <p>
+
+                Use AI-powered tools to understand online safety,
+                test your knowledge and clear your doubts.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="row g-4">
+
+
+            <!-- AI NOTES -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <a
+                    href="{{ url_for('notes', chapter='internetsafety') }}"
+                    style="text-decoration:none;">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon blue">
+
+                            <i class="fa-solid fa-file-lines"></i>
+
+                        </div>
+
+
+                        <h4>
+                            AI Notes
+                        </h4>
+
+
+                        <p>
+
+                            Generate structured and
+                            easy-to-understand notes covering
+                            important Internet Safety concepts.
+
+                        </p>
+
+
+                        <div class="feature-link">
+
+                            Start Learning
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- AI QUIZ -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <a
+                    href="{{ url_for('quiz', chapter='internetsafety') }}"
+                    style="text-decoration:none;">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon purple">
+
+                            <i class="fa-solid fa-puzzle-piece"></i>
+
+                        </div>
+
+
+                        <h4>
+                            AI Quiz
+                        </h4>
+
+
+                        <p>
+
+                            Test your understanding of Internet
+                            Safety through AI-generated questions
+                            and interactive practice.
+
+                        </p>
+
+
+                        <div class="feature-link">
+
+                            Take Quiz
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- ASK AI -->
+
+            <div class="col-lg-4 col-md-6">
+
+                <a
+                    href="{{ url_for('askai', chapter='internetsafety') }}"
+                    style="text-decoration:none;">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon cyan">
+
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                        </div>
+
+
+                        <h4>
+                            Ask AI
+                        </h4>
+
+
+                        <p>
+
+                            Ask questions about Internet Safety
+                            and receive simple AI-powered
+                            explanations whenever you need help.
+
+                        </p>
+
+
+                        <div class="feature-link">
+
+                            Ask Your Doubt
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     INFORMATION
+===================================================== -->
+
+<section class="info-section">
+
+    <div class="container">
+
+        <div class="info-box">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-8">
+
+                    <h3>
+
+                        Why learn Internet Safety?
+
+                    </h3>
+
+
+                    <p>
+
+                        Internet Safety helps students understand
+                        how to protect personal information, create
+                        strong passwords, identify online threats,
+                        avoid unsafe websites and behave responsibly
+                        in the digital world. Learn the concepts,
+                        practise through quizzes and use AI whenever
+                        you need help.
+
+                    </p>
+
+                </div>
+
+
+                <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+
+                    <i
+                        class="fa-solid fa-shield-halved"
+                        style="font-size:60px;color:#6366f1;">
+                    </i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-6">
+
+                <a
+                    href="{{ url_for('home') }}"
+                    class="footer-brand">
+
+                    <i class="fa-solid fa-brain"></i>
+
+                    IT-EvoLearn
+
+                </a>
+
+
+                <p>
+
+                    AI-Powered Continuous Adaptive Learning
+                    System for Information Technology.
+
+                </p>
+
+            </div>
+
+
+            <div class="col-md-6 text-md-end">
+
+                <p>
+
+                    © 2026 IT-EvoLearn. All rights reserved.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

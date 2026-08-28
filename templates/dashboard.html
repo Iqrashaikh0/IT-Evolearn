@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IT-EvoLearn | Dashboard</title>
+
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Inter",sans-serif;
+    background:#f5f8ff;
+    color:#172554;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar{
+
+    position:fixed;
+
+    left:0;
+    top:0;
+
+    width:280px;
+    height:100vh;
+
+    background:
+        linear-gradient(
+            180deg,
+            #0f172a 0%,
+            #172554 55%,
+            #1e3a8a 100%
+        );
+
+    padding:28px 18px;
+
+    z-index:1000;
+
+    box-shadow:
+        8px 0 30px rgba(15,23,42,.15);
+}
+
+
+/* BRAND */
+
+.sidebar-brand{
+
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:23px;
+    font-weight:800;
+
+    padding:5px 12px 30px;
+
+    border-bottom:1px solid rgba(255,255,255,.12);
+}
+
+.sidebar-brand span{
+    color:#67e8f9;
+}
+
+.brand-icon{
+
+    width:42px;
+    height:42px;
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6366f1,
+            #06b6d4
+        );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+}
+
+
+/* SIDEBAR LABEL */
+
+.sidebar-label{
+
+    color:#94a3b8;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    letter-spacing:1.2px;
+
+    margin:30px 12px 12px;
+}
+
+
+/* SIDEBAR LINKS */
+
+.sidebar-link{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    padding:14px 15px;
+
+    margin-bottom:7px;
+
+    border-radius:13px;
+
+    color:#cbd5e1;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    transition:.25s ease;
+}
+
+.sidebar-link i{
+
+    width:25px;
+
+    text-align:center;
+
+    font-size:17px;
+}
+
+.sidebar-link:hover{
+
+    background:rgba(255,255,255,.10);
+
+    color:white;
+
+    transform:translateX(4px);
+}
+
+
+/* ACTIVE */
+
+.sidebar-link.active{
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #2563eb
+        );
+
+    color:white;
+
+    box-shadow:
+        0 8px 20px rgba(37,99,235,.25);
+}
+
+
+/* SIDEBAR BOTTOM */
+
+.sidebar-bottom{
+
+    position:absolute;
+
+    bottom:25px;
+
+    left:18px;
+    right:18px;
+}
+
+.home-sidebar{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:13px 15px;
+
+    border-radius:13px;
+
+    color:#cbd5e1;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    background:rgba(255,255,255,.06);
+
+    transition:.25s;
+}
+
+.home-sidebar:hover{
+
+    color:white;
+
+    background:rgba(255,255,255,.12);
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.main-content{
+
+    margin-left:280px;
+
+    min-height:100vh;
+
+    padding:35px 45px 50px;
+}
+
+
+/* =====================================================
+   TOP HEADER
+===================================================== */
+
+.top-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:35px;
+}
+
+.dashboard-label{
+
+    color:#6366f1;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    letter-spacing:1.5px;
+
+    margin-bottom:7px;
+}
+
+.top-header h1{
+
+    font-size:34px;
+
+    font-weight:800;
+
+    margin-bottom:7px;
+
+    color:#172554;
+}
+
+.top-header h1 span{
+
+    color:#4f46e5;
+}
+
+.top-header p{
+
+    color:#64748b;
+
+    font-size:14px;
+
+    margin:0;
+}
+
+
+/* AI ACTIVE */
+
+.ai-active{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:10px 16px;
+
+    background:#ecfdf5;
+
+    color:#15803d;
+
+    border:1px solid #bbf7d0;
+
+    border-radius:25px;
+
+    font-size:13px;
+
+    font-weight:700;
+}
+
+.ai-active span{
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+.stats-row{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:18px;
+
+    margin-bottom:25px;
+}
+
+.stat-card{
+
+    background:white;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    box-shadow:
+        0 7px 25px rgba(30,41,59,.05);
+
+    transition:.25s;
+}
+
+.stat-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 12px 30px rgba(30,41,59,.10);
+}
+
+.stat-icon{
+
+    width:45px;
+    height:45px;
+
+    border-radius:12px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    margin-bottom:15px;
+
+    font-size:19px;
+}
+
+.stat-blue{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.stat-purple{
+    background:#ede9fe;
+    color:#7c3aed;
+}
+
+.stat-cyan{
+    background:#cffafe;
+    color:#0891b2;
+}
+
+.stat-green{
+    background:#dcfce7;
+    color:#16a34a;
+}
+
+.stat-card h3{
+
+    font-size:25px;
+
+    font-weight:800;
+
+    margin:0;
+
+    color:#172554;
+}
+
+.stat-card p{
+
+    margin:4px 0 0;
+
+    color:#64748b;
+
+    font-size:13px;
+}
+
+
+/* =====================================================
+   DASHBOARD GRID
+===================================================== */
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1.7fr 1fr;
+
+    gap:22px;
+
+    margin-bottom:25px;
+}
+
+
+/* =====================================================
+   GRAPH CARD
+===================================================== */
+
+.graph-card{
+
+    background:white;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:
+        0 8px 28px rgba(30,41,59,.05);
+}
+
+.card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+}
+
+.card-header h3{
+
+    font-size:18px;
+
+    font-weight:800;
+
+    color:#172554;
+
+    margin:0;
+}
+
+.card-header span{
+
+    color:#64748b;
+
+    font-size:12px;
+}
+
+
+/* =====================================================
+   BAR GRAPH
+===================================================== */
+
+.graph{
+
+    height:230px;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:space-around;
+
+    padding:10px 15px 0;
+
+    border-bottom:1px solid #e5e7eb;
+
+    background:
+        repeating-linear-gradient(
+            to top,
+            transparent 0px,
+            transparent 45px,
+            #f1f5f9 46px
+        );
+}
+
+.bar-wrapper{
+
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    gap:8px;
+}
+
+.bar{
+
+    width:34px;
+
+    border-radius:8px 8px 0 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #6366f1,
+            #06b6d4
+        );
+
+    transition:.3s;
+}
+
+.bar:hover{
+
+    opacity:.8;
+
+    transform:scaleY(1.03);
+}
+
+.bar-label{
+
+    font-size:11px;
+
+    color:#64748b;
+
+    padding-top:8px;
+}
+
+
+/* =====================================================
+   PIE CHART
+===================================================== */
+
+.pie-card{
+
+    background:white;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:
+        0 8px 28px rgba(30,41,59,.05);
+}
+
+
+/* PIE HEADER */
+
+.pie-header{
+
+    margin-bottom:20px;
+}
+
+.pie-title{
+
+    font-size:18px;
+
+    font-weight:800;
+
+    color:#172554;
+
+    margin:0 0 8px;
+}
+
+
+/* SELECTED LEVEL */
+
+.selected-level{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:6px 11px;
+
+    background:#eef2ff;
+
+    color:#4f46e5;
+
+    border:1px solid #c7d2fe;
+
+    border-radius:20px;
+
+    font-size:11px;
+
+    font-weight:700;
+}
+
+.selected-level i{
+
+    font-size:10px;
+}
+
+
+/* PIE */
+
+.pie{
+
+    width:170px;
+
+    height:170px;
+
+    border-radius:50%;
+
+    margin:20px auto;
+
+    background:
+        conic-gradient(
+            #6366f1 0deg 120deg,
+            #06b6d4 120deg 210deg,
+            #22c55e 210deg 285deg,
+            #f59e0b 285deg 360deg
+        );
+
+    position:relative;
+}
+
+.pie::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:90px;
+    height:90px;
+
+    background:white;
+
+    border-radius:50%;
+
+    top:40px;
+    left:40px;
+}
+
+.pie-center{
+
+    position:absolute;
+
+    z-index:2;
+
+    top:64px;
+    left:0;
+    right:0;
+
+    text-align:center;
+
+    font-size:20px;
+
+    font-weight:800;
+
+    color:#172554;
+}
+
+.pie-center small{
+
+    display:block;
+
+    font-size:10px;
+
+    color:#64748b;
+
+    font-weight:500;
+}
+
+
+/* PIE LEGEND */
+
+.legend{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
+
+    margin-top:15px;
+}
+
+.legend-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    font-size:12px;
+
+    color:#64748b;
+}
+
+.legend-dot{
+
+    width:9px;
+    height:9px;
+
+    border-radius:50%;
+}
+
+.dot1{
+    background:#6366f1;
+}
+
+.dot2{
+    background:#06b6d4;
+}
+
+.dot3{
+    background:#22c55e;
+}
+
+.dot4{
+    background:#f59e0b;
+}
+
+
+/* =====================================================
+   LEVEL CARDS
+===================================================== */
+
+.level-section{
+
+    margin-top:5px;
+}
+
+.level-section-title{
+
+    font-size:20px;
+
+    font-weight:800;
+
+    margin-bottom:18px;
+
+    color:#172554;
+}
+
+.level-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:18px;
+}
+
+.level-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    background:white;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+    box-shadow:
+        0 7px 25px rgba(30,41,59,.04);
+}
+
+.level-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 14px 30px rgba(30,41,59,.10);
+
+    border-color:#c7d2fe;
+}
+
+.level-icon{
+
+    width:58px;
+    height:58px;
+
+    min-width:58px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:23px;
+}
+
+.secondary-card .level-icon{
+
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.junior-card .level-icon{
+
+    background:#ede9fe;
+    color:#7c3aed;
+}
+
+.degree-card .level-icon{
+
+    background:#cffafe;
+    color:#0891b2;
+}
+
+.pg-card .level-icon{
+
+    background:#dcfce7;
+    color:#16a34a;
+}
+
+.level-content small{
+
+    color:#6366f1;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+}
+
+.level-content h3{
+
+    font-size:18px;
+
+    font-weight:800;
+
+    margin:4px 0;
+
+    color:#172554;
+}
+
+.level-content p{
+
+    color:#64748b;
+
+    font-size:12px;
+
+    margin:0;
+
+    line-height:1.5;
+}
+
+
+/* =====================================================
+   AI MESSAGE
+===================================================== */
+
+.ai-message{
+
+    margin-top:22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef2ff,
+            #ecfeff
+        );
+
+    border:1px solid #dbeafe;
+
+    border-radius:18px;
+
+    padding:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.ai-message-icon{
+
+    width:48px;
+    height:48px;
+
+    min-width:48px;
+
+    border-radius:14px;
+
+    background:#4f46e5;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:20px;
+}
+
+.ai-message strong{
+
+    color:#312e81;
+
+    font-size:14px;
+}
+
+.ai-message p{
+
+    margin:4px 0 0;
+
+    color:#64748b;
+
+    font-size:12px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:992px){
+
+    .sidebar{
+
+        width:220px;
+    }
+
+    .main-content{
+
+        margin-left:220px;
+
+        padding:30px;
+    }
+
+    .stats-row{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .dashboard-grid{
+
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+@media(max-width:768px){
+
+    .sidebar{
+
+        position:relative;
+
+        width:100%;
+
+        height:auto;
+
+        min-height:auto;
+    }
+
+    .sidebar-bottom{
+
+        position:static;
+
+        margin-top:20px;
+    }
+
+    .main-content{
+
+        margin-left:0;
+
+        padding:25px 18px;
+    }
+
+    .top-header{
+
+        align-items:flex-start;
+
+        gap:15px;
+
+        flex-direction:column;
+    }
+
+    .top-header h1{
+
+        font-size:28px;
+    }
+
+    .stats-row{
+
+        grid-template-columns:1fr 1fr;
+    }
+
+    .level-grid{
+
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+@media(max-width:480px){
+
+    .stats-row{
+
+        grid-template-columns:1fr;
+    }
+
+    .sidebar-brand{
+
+        padding-bottom:20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LEFT SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+
+    <!-- BRAND -->
+
+    <a
+    href="{{ url_for('dashboard') }}"
+    class="sidebar-brand">
+
+        <span class="brand-icon">
+
+            <i class="fa-solid fa-brain"></i>
+
+        </span>
+
+        IT-Evo<span>Learn</span>
+
+    </a>
+
+
+    <!-- LEARNING -->
+
+    <div class="sidebar-label">
+
+        LEARNING LEVELS
+
+    </div>
+
+
+    <a
+    href="{{ url_for('secondary') }}"
+    class="sidebar-link">
+
+        <i class="fa-solid fa-school"></i>
+
+        Secondary
+
+    </a>
+
+
+    <a
+    href="{{ url_for('junior') }}"
+    class="sidebar-link">
+
+        <i class="fa-solid fa-user-graduate"></i>
+
+        Junior College
+
+    </a>
+
+
+    <a
+    href="{{ url_for('degree') }}"
+    class="sidebar-link">
+
+        <i class="fa-solid fa-graduation-cap"></i>
+
+        Degree
+
+    </a>
+
+
+    <a
+    href="{{ url_for('pg') }}"
+    class="sidebar-link">
+
+        <i class="fa-solid fa-user-tie"></i>
+
+        Post Graduation
+
+    </a>
+
+
+    <!-- DASHBOARD -->
+
+    <div class="sidebar-label">
+
+        DASHBOARD
+
+    </div>
+
+
+    <a
+    href="{{ url_for('dashboard') }}"
+    class="sidebar-link active">
+
+        <i class="fa-solid fa-chart-pie"></i>
+
+        Overview
+
+    </a>
+
+
+    <div class="sidebar-bottom">
+
+        <a
+        href="{{ url_for('home') }}"
+        class="home-sidebar">
+
+            <i class="fa-solid fa-house"></i>
+
+            Home
+
+        </a>
+
+    </div>
+
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- HEADER -->
+
+    <div class="top-header">
+
+
+        <div>
+
+            <div class="dashboard-label">
+
+                LEARNING DASHBOARD
+
+            </div>
+
+
+            <h1>
+
+                Welcome to
+                <span>IT-EvoLearn</span>
+
+            </h1>
+
+
+            <p>
+
+                Track your learning progress and continue
+                your personalized IT learning journey.
+
+            </p>
+
+        </div>
+
+
+        <div class="ai-active">
+
+            <span></span>
+
+            AI Learning Active
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         STATISTICS
+    ================================================= -->
+
+    <div class="stats-row">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon stat-blue">
+
+                <i class="fa-solid fa-book-open"></i>
+
+            </div>
+
+            <h3>24</h3>
+
+            <p>Topics Completed</p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon stat-purple">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+            <h3>88%</h3>
+
+            <p>Quiz Accuracy</p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon stat-cyan">
+
+                <i class="fa-solid fa-clock"></i>
+
+            </div>
+
+            <h3>42h</h3>
+
+            <p>Learning Time</p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon stat-green">
+
+                <i class="fa-solid fa-fire"></i>
+
+            </div>
+
+            <h3>9</h3>
+
+            <p>Day Streak</p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         GRAPH + PIE
+    ================================================= -->
+
+    <div class="dashboard-grid">
+
+
+        <!-- PROGRESS GRAPH -->
+
+        <div class="graph-card">
+
+
+            <div class="card-header">
+
+                <h3>
+
+                    Learning Progress
+
+                </h3>
+
+                <span>
+
+                    Last 6 weeks
+
+                </span>
+
+            </div>
+
+
+            <div class="graph">
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                    class="bar"
+                    style="height:35%;">
+                    </div>
+
+                    <div class="bar-label">
+                        W1
+                    </div>
+
+                </div>
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                    class="bar"
+                    style="height:48%;">
+                    </div>
+
+                    <div class="bar-label">
+                        W2
+                    </div>
+
+                </div>
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                    class="bar"
+                    style="height:58%;">
+                    </div>
+
+                    <div class="bar-label">
+                        W3
+                    </div>
+
+                </div>
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                    class="bar"
+                    style="height:66%;">
+                    </div>
+
+                    <div class="bar-label">
+                        W4
+                    </div>
+
+                </div>
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                    class="bar"
+                    style="height:78%;">
+                    </div>
+
+                    <div class="bar-label">
+                        W5
+                    </div>
+
+                </div>
+
+
+                <div class="bar-wrapper">
+
+                    <div
+                    class="bar"
+                    style="height:90%;">
+                    </div>
+
+                    <div class="bar-label">
+                        W6
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PIE CHART
+        ================================================= -->
+
+        <div class="pie-card">
+
+
+            <!-- PIE HEADER -->
+
+            <div class="pie-header">
+
+                <h3 class="pie-title">
+
+                    Learning Distribution
+
+                </h3>
+
+
+                <!-- SELECTED LEVEL -->
+
+                <div class="selected-level">
+
+                    <i class="fa-solid fa-school"></i>
+
+                    Secondary Level
+
+                </div>
+
+            </div>
+
+
+            <!-- PIE -->
+
+            <div class="pie">
+
+                <div class="pie-center">
+
+                    24
+
+                    <small>
+                        Topics
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- LEGEND -->
+
+            <div class="legend">
+
+
+                <div class="legend-item">
+
+                    <span class="legend-dot dot1"></span>
+
+                    Theory
+
+                </div>
+
+
+                <div class="legend-item">
+
+                    <span class="legend-dot dot2"></span>
+
+                    Quiz
+
+                </div>
+
+
+                <div class="legend-item">
+
+                    <span class="legend-dot dot3"></span>
+
+                    Practice
+
+                </div>
+
+
+                <div class="legend-item">
+
+                    <span class="legend-dot dot4"></span>
+
+                    Projects
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         LEARNING LEVELS
+    ================================================= -->
+
+    <div class="level-section">
+
+
+        <div class="level-section-title">
+
+            Continue Learning
+
+        </div>
+
+
+        <div class="level-grid">
+
+
+            <!-- SECONDARY -->
+
+            <a
+            href="{{ url_for('secondary') }}"
+            class="level-card secondary-card">
+
+
+                <div class="level-icon">
+
+                    <i class="fa-solid fa-school"></i>
+
+                </div>
+
+
+                <div class="level-content">
+
+                    <small>
+                        LEVEL 01
+                    </small>
+
+                    <h3>
+                        Secondary
+                    </h3>
+
+                    <p>
+                        Build strong foundations in
+                        computer and IT concepts.
+                    </p>
+
+                </div>
+
+
+            </a>
+
+
+
+            <!-- JUNIOR -->
+
+            <a
+            href="{{ url_for('junior') }}"
+            class="level-card junior-card">
+
+
+                <div class="level-icon">
+
+                    <i class="fa-solid fa-user-graduate"></i>
+
+                </div>
+
+
+                <div class="level-content">
+
+                    <small>
+                        LEVEL 02
+                    </small>
+
+                    <h3>
+                        Junior College
+                    </h3>
+
+                    <p>
+                        Develop programming and
+                        technical problem-solving skills.
+                    </p>
+
+                </div>
+
+
+            </a>
+
+
+
+            <!-- DEGREE -->
+
+            <a
+            href="{{ url_for('degree') }}"
+            class="level-card degree-card">
+
+
+                <div class="level-icon">
+
+                    <i class="fa-solid fa-graduation-cap"></i>
+
+                </div>
+
+
+                <div class="level-content">
+
+                    <small>
+                        LEVEL 03
+                    </small>
+
+                    <h3>
+                        Degree
+                    </h3>
+
+                    <p>
+                        Strengthen advanced IT concepts
+                        and technical knowledge.
+                    </p>
+
+                </div>
+
+
+            </a>
+
+
+
+            <!-- PG -->
+
+            <a
+            href="{{ url_for('pg') }}"
+            class="level-card pg-card">
+
+
+                <div class="level-icon">
+
+                    <i class="fa-solid fa-user-tie"></i>
+
+                </div>
+
+
+                <div class="level-content">
+
+                    <small>
+                        LEVEL 04
+                    </small>
+
+                    <h3>
+                        Post Graduation
+                    </h3>
+
+                    <p>
+                        Explore advanced technologies
+                        and specialized IT concepts.
+                    </p>
+
+                </div>
+
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         AI MESSAGE
+    ================================================= -->
+
+    <div class="ai-message">
+
+
+        <div class="ai-message-icon">
+
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+        </div>
+
+
+        <div>
+
+            <strong>
+
+                Your learning path evolves with you.
+
+            </strong>
+
+
+            <p>
+
+                IT-EvoLearn analyzes your learning progress
+                and provides personalized guidance.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+</main>
+
+
+
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Machine Learning | IT-EvoLearn</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Inter",sans-serif;
+    background:#f8faff;
+    color:#172554;
+}
+
+/* NAVBAR */
+
+.navbar{
+    background:#0f172a;
+    padding:15px 0;
+}
+
+.navbar-brand{
+    color:white !important;
+    font-size:23px;
+    font-weight:800;
+}
+
+.navbar-brand i{
+    color:#67e8f9;
+    margin-right:8px;
+}
+
+.navbar-brand span{
+    color:#67e8f9;
+}
+
+.nav-link{
+    color:#cbd5e1 !important;
+    margin-left:20px;
+    font-weight:500;
+}
+
+.nav-link:hover,
+.nav-link.active{
+    color:#67e8f9 !important;
+}
+
+/* HERO */
+
+.hero{
+    padding:90px 0 60px;
+    background:
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(103,232,249,.25),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #f8fbff,
+            #eef2ff
+        );
+}
+
+.hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:#dbeafe;
+    color:#2563eb;
+    padding:9px 17px;
+    border-radius:25px;
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:48px;
+    font-weight:800;
+    margin-bottom:15px;
+}
+
+.hero h1 span{
+    color:#6366f1;
+}
+
+.hero p{
+    color:#64748b;
+    max-width:750px;
+    margin:auto;
+    line-height:1.7;
+    font-size:16px;
+}
+
+/* LEARNING */
+
+.learning-section{
+    padding:70px 0;
+}
+
+.section-label{
+    color:#6366f1;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:1px;
+    margin-bottom:8px;
+}
+
+.section-title{
+    font-size:32px;
+    font-weight:800;
+    color:#172554;
+}
+
+.section-subtitle{
+    color:#64748b;
+    margin-bottom:40px;
+}
+
+/* FEATURE CARDS */
+
+.feature-card{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:22px;
+    padding:35px 28px;
+    height:100%;
+    text-decoration:none;
+    display:block;
+    transition:.3s ease;
+    box-shadow:0 8px 25px rgba(30,41,59,.05);
+}
+
+.feature-card:hover{
+    transform:translateY(-9px);
+    box-shadow:0 18px 40px rgba(30,41,59,.12);
+    border-color:#c7d2fe;
+}
+
+.feature-icon{
+    width:65px;
+    height:65px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+    margin-bottom:22px;
+}
+
+.blue{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.purple{
+    background:#ede9fe;
+    color:#7c3aed;
+}
+
+.cyan{
+    background:#cffafe;
+    color:#0891b2;
+}
+
+.feature-card h3{
+    font-size:21px;
+    font-weight:750;
+    color:#172554;
+    margin-bottom:10px;
+}
+
+.feature-card p{
+    color:#64748b;
+    font-size:14px;
+    line-height:1.7;
+    margin-bottom:22px;
+}
+
+.feature-btn{
+    color:#4f46e5;
+    font-weight:700;
+    font-size:14px;
+}
+
+/* TOPICS */
+
+.topic-section{
+    background:#eef2ff;
+    padding:60px 0;
+}
+
+.topic-box{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:20px;
+    padding:30px;
+    height:100%;
+}
+
+.topic-box h4{
+    font-weight:750;
+    margin-bottom:18px;
+}
+
+.topic-list{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.topic-list li{
+    padding:10px 0;
+    color:#64748b;
+    border-bottom:1px solid #f1f5f9;
+}
+
+.topic-list li:last-child{
+    border-bottom:none;
+}
+
+.topic-list i{
+    color:#6366f1;
+    margin-right:10px;
+}
+
+/* AI SECTION */
+
+.ai-section{
+    padding:65px 0;
+    background:
+        linear-gradient(
+            135deg,
+            #312e81,
+            #4f46e5,
+            #0891b2
+        );
+    color:white;
+}
+
+.ai-section h2{
+    font-size:34px;
+    font-weight:800;
+    margin-bottom:12px;
+}
+
+.ai-section p{
+    max-width:700px;
+    margin:0 auto 25px;
+    opacity:.9;
+    line-height:1.7;
+}
+
+/* FOOTER */
+
+footer{
+    background:#0f172a;
+    color:#94a3b8;
+    padding:35px 0;
+}
+
+.footer-brand{
+    color:white;
+    font-size:20px;
+    font-weight:800;
+    text-decoration:none;
+}
+
+.footer-brand i{
+    color:#67e8f9;
+    margin-right:7px;
+}
+
+footer p{
+    font-size:13px;
+    margin:8px 0 0;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .hero{
+        padding:70px 0 45px;
+    }
+
+    .hero h1{
+        font-size:35px;
+    }
+
+    .section-title{
+        font-size:28px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+
+<div class="container">
+
+<a class="navbar-brand" href="{{ url_for('home') }}">
+
+<i class="fa-solid fa-brain"></i>
+
+IT-Evo<span>Learn</span>
+
+</a>
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#menu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+<div class="collapse navbar-collapse" id="menu">
+
+<ul class="navbar-nav ms-auto">
+
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('home') }}">
+Home
+</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('secondary') }}">
+Secondary
+</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('junior') }}">
+Junior
+</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="{{ url_for('degree') }}">
+Degree
+</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link active" href="{{ url_for('pg') }}">
+PG
+</a>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="container text-center">
+
+<div class="hero-badge">
+
+<i class="fa-solid fa-robot"></i>
+
+PG LEVEL
+
+</div>
+
+<h1>
+
+Machine
+<span>Learning</span>
+
+</h1>
+
+<p>
+
+Learn how machines learn from data to identify patterns,
+make predictions and solve real-world problems using
+modern Machine Learning techniques.
+
+</p>
+
+</div>
+
+</section>
+
+
+<!-- AI FEATURES -->
+
+<section class="learning-section">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<div class="section-label">
+AI-POWERED LEARNING
+</div>
+
+<h2 class="section-title">
+Learn Machine Learning With AI
+</h2>
+
+<p class="section-subtitle">
+Choose a learning tool to improve your Machine Learning concepts.
+</p>
+
+</div>
+
+
+<div class="row g-4">
+
+
+<!-- NOTES -->
+
+<div class="col-lg-4 col-md-6">
+
+<a
+href="{{ url_for('notes', chapter='ml') }}"
+class="feature-card">
+
+<div class="feature-icon blue">
+
+<i class="fa-solid fa-book-open"></i>
+
+</div>
+
+<h3>
+AI Notes
+</h3>
+
+<p>
+Generate structured and easy-to-understand
+Machine Learning notes using AI.
+</p>
+
+<div class="feature-btn">
+
+Start Learning
+
+<i class="fa-solid fa-arrow-right ms-1"></i>
+
+</div>
+
+</a>
+
+</div>
+
+
+<!-- QUIZ -->
+
+<div class="col-lg-4 col-md-6">
+
+<a
+href="{{ url_for('quiz', chapter='ml') }}"
+class="feature-card">
+
+<div class="feature-icon purple">
+
+<i class="fa-solid fa-circle-question"></i>
+
+</div>
+
+<h3>
+AI Quiz
+</h3>
+
+<p>
+Test your Machine Learning knowledge through
+interactive AI-powered questions.
+</p>
+
+<div class="feature-btn">
+
+Start Quiz
+
+<i class="fa-solid fa-arrow-right ms-1"></i>
+
+</div>
+
+</a>
+
+</div>
+
+
+<!-- ASK AI -->
+
+<div class="col-lg-4 col-md-6">
+
+<a
+href="{{ url_for('askai', chapter='ml') }}"
+class="feature-card">
+
+<div class="feature-icon cyan">
+
+<i class="fa-solid fa-robot"></i>
+
+</div>
+
+<h3>
+Ask AI
+</h3>
+
+<p>
+Ask questions about Machine Learning and receive
+instant AI-powered explanations.
+</p>
+
+<div class="feature-btn">
+
+Ask AI
+
+<i class="fa-solid fa-arrow-right ms-1"></i>
+
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- TOPICS -->
+
+<section class="topic-section">
+
+<div class="container">
+
+<div class="text-center mb-5">
+
+<div class="section-label">
+MACHINE LEARNING
+</div>
+
+<h2 class="section-title">
+Important Machine Learning Topics
+</h2>
+
+<p class="section-subtitle">
+Learn Machine Learning concepts step by step.
+</p>
+
+</div>
+
+
+<div class="row g-4">
+
+
+<!-- FUNDAMENTALS -->
+
+<div class="col-lg-4">
+
+<div class="topic-box">
+
+<h4>
+<i class="fa-solid fa-brain me-2 text-primary"></i>
+ML Fundamentals
+</h4>
+
+<ul class="topic-list">
+
+<li>
+<i class="fa-solid fa-check"></i>
+Introduction to Machine Learning
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Training and Testing Data
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Features and Labels
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Model Evaluation
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+
+<!-- ALGORITHMS -->
+
+<div class="col-lg-4">
+
+<div class="topic-box">
+
+<h4>
+<i class="fa-solid fa-gears me-2 text-primary"></i>
+ML Algorithms
+</h4>
+
+<ul class="topic-list">
+
+<li>
+<i class="fa-solid fa-check"></i>
+Linear Regression
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Decision Trees
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+K-Nearest Neighbors
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Support Vector Machines
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+
+<!-- ADVANCED -->
+
+<div class="col-lg-4">
+
+<div class="topic-box">
+
+<h4>
+<i class="fa-solid fa-chart-line me-2 text-primary"></i>
+Advanced ML
+</h4>
+
+<ul class="topic-list">
+
+<li>
+<i class="fa-solid fa-check"></i>
+Neural Networks
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Deep Learning
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Model Optimization
+</li>
+
+<li>
+<i class="fa-solid fa-check"></i>
+Hyperparameter Tuning
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- AI ASSISTANT -->
+
+<section class="ai-section">
+
+<div class="container text-center">
+
+<i class="fa-solid fa-brain fa-3x mb-3"></i>
+
+<h2>
+Your AI Machine Learning Assistant
+</h2>
+
+<p>
+
+Confused about algorithms, training data, regression,
+classification or neural networks? Ask AI for simple
+explanations, examples and guidance.
+
+</p>
+
+<a
+href="{{ url_for('askai', chapter='ml') }}"
+class="btn btn-light btn-lg">
+
+<i class="fa-solid fa-comments"></i>
+
+Ask AI Now
+
+</a>
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="container">
+
+<div class="row align-items-center">
+
+<div class="col-md-7">
+
+<a
+href="{{ url_for('home') }}"
+class="footer-brand">
+
+<i class="fa-solid fa-brain"></i>
+
+IT-EvoLearn
+
+</a>
+
+<p>
+
+AI-Powered Continuous Adaptive Learning
+System for Information Technology.
+
+</p>
+
+</div>
+
+<div class="col-md-5 text-md-end">
+
+<p>
+Machine Learning | PG Learning
+</p>
+
+<p>
+© 2026 IT-EvoLearn
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</footer>
+
+
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+</body>
+
+</html>

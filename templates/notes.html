@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Notes - IT-EvoLearn</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:Arial,sans-serif;
+            background:#f4f7fb;
+            color:#172554;
+            padding:30px;
+        }
+
+        .container{
+            max-width:1000px;
+            margin:auto;
+            background:white;
+            padding:40px;
+            border-radius:18px;
+            box-shadow:0 5px 25px rgba(0,0,0,.12);
+        }
+
+        h1{
+            color:#1e3a8a;
+            margin-bottom:30px;
+            font-size:32px;
+        }
+
+        .notes{
+            font-size:17px;
+            line-height:1.7;
+            color:#334155;
+        }
+
+        .notes h1{
+            color:#1e3a8a;
+            font-size:30px;
+            margin-top:10px;
+        }
+
+        .notes h2{
+            color:#2563eb;
+            font-size:23px;
+            margin-top:28px;
+            margin-bottom:10px;
+        }
+
+        .notes h3{
+            color:#4338ca;
+            font-size:19px;
+            margin-top:20px;
+            margin-bottom:8px;
+        }
+
+        .notes p{
+            margin-bottom:12px;
+        }
+
+        .notes ul{
+            margin-left:25px;
+            margin-bottom:15px;
+        }
+
+        .notes li{
+            margin-bottom:7px;
+        }
+
+        /* BUTTON AREA */
+
+        .button-area{
+            margin-top:40px;
+            padding-top:25px;
+            border-top:1px solid #e5e7eb;
+
+            display:flex;
+            gap:15px;
+            flex-wrap:wrap;
+        }
+
+        .btn{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+
+            padding:12px 22px;
+
+            border-radius:10px;
+
+            text-decoration:none;
+
+            font-weight:700;
+
+            transition:.3s;
+        }
+
+        .quiz-btn{
+            background:#4f46e5;
+            color:white;
+        }
+
+        .quiz-btn:hover{
+            background:#3730a3;
+            transform:translateY(-2px);
+        }
+
+        .back-btn{
+            background:#eef2ff;
+            color:#4f46e5;
+        }
+
+        .back-btn:hover{
+            background:#6366f1;
+            color:white;
+            transform:translateY(-2px);
+        }
+
+        @media(max-width:600px){
+
+            body{
+                padding:15px;
+            }
+
+            .container{
+                padding:25px 20px;
+            }
+
+            h1{
+                font-size:26px;
+            }
+
+            .notes{
+                font-size:15px;
+            }
+
+            .button-area{
+                flex-direction:column;
+            }
+
+            .btn{
+                justify-content:center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <!-- PAGE TITLE -->
+
+    <h1>
+        📖 {{ chapter|title }} Notes
+    </h1>
+
+
+    <!-- AI GENERATED NOTES -->
+
+    <div class="notes">
+
+        {{ notes | safe }}
+
+    </div>
+
+
+    <!-- BUTTONS -->
+
+    <div class="button-area">
+
+        <!-- QUIZ BUTTON -->
+
+        <a
+            href="{{ url_for('quiz', chapter=chapter) }}"
+            class="btn quiz-btn">
+
+            🧩 Take Quiz
+
+        </a>
+
+
+        <!-- BACK BUTTON -->
+
+        <a
+            href="javascript:history.back()"
+            class="btn back-btn">
+
+            ← Back
+
+        </a>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>
+

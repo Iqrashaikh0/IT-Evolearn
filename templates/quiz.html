@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ chapter|title }} Quiz - IT-EvoLearn</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
+
+        body{
+
+            min-height:100vh;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(96,165,250,.25),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #eef5ff,
+                    #e0e7ff
+                );
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            padding:30px;
+        }
+
+        .container{
+
+            width:750px;
+            max-width:100%;
+
+            background:white;
+
+            padding:35px;
+
+            border-radius:22px;
+
+            box-shadow:
+                0 15px 45px rgba(30,41,59,.12);
+        }
+
+        .header{
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            margin-bottom:25px;
+        }
+
+        .title{
+
+            color:#172554;
+
+            font-size:28px;
+
+            font-weight:800;
+        }
+
+        .title span{
+
+            color:#6366f1;
+        }
+
+        .timer{
+
+            background:#fee2e2;
+
+            color:#dc2626;
+
+            padding:10px 16px;
+
+            border-radius:12px;
+
+            font-weight:800;
+
+            font-size:16px;
+        }
+
+        .progress-info{
+
+            display:flex;
+
+            justify-content:space-between;
+
+            color:#64748b;
+
+            font-size:13px;
+
+            margin-bottom:8px;
+        }
+
+        .progress-bar{
+
+            width:100%;
+
+            height:8px;
+
+            background:#e5e7eb;
+
+            border-radius:10px;
+
+            overflow:hidden;
+
+            margin-bottom:30px;
+        }
+
+        .progress-fill{
+
+            height:100%;
+
+            width:10%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #6366f1,
+                    #06b6d4
+                );
+
+            transition:.3s;
+        }
+
+        .question-box{
+
+            display:none;
+        }
+
+        .question-box.active{
+
+            display:block;
+        }
+
+        .question-number{
+
+            color:#6366f1;
+
+            font-size:13px;
+
+            font-weight:800;
+
+            margin-bottom:10px;
+        }
+
+        .question-text{
+
+            color:#172554;
+
+            font-size:21px;
+
+            font-weight:700;
+
+            line-height:1.5;
+
+            margin-bottom:25px;
+        }
+
+        .option{
+
+            display:block;
+
+            padding:15px 18px;
+
+            margin:12px 0;
+
+            border:2px solid #e5e7eb;
+
+            border-radius:13px;
+
+            cursor:pointer;
+
+            color:#334155;
+
+            font-size:15px;
+
+            transition:.25s;
+        }
+
+        .option:hover{
+
+            background:#eef2ff;
+
+            border-color:#818cf8;
+        }
+
+        .option input{
+
+            margin-right:10px;
+
+            accent-color:#6366f1;
+        }
+
+        .navigation{
+
+            display:flex;
+
+            justify-content:space-between;
+
+            margin-top:30px;
+
+            gap:15px;
+        }
+
+        .nav-btn{
+
+            border:none;
+
+            padding:12px 22px;
+
+            border-radius:11px;
+
+            font-weight:700;
+
+            cursor:pointer;
+
+            font-size:14px;
+        }
+
+        .prev-btn{
+
+            background:#eef2ff;
+
+            color:#4f46e5;
+        }
+
+        .next-btn{
+
+            background:#4f46e5;
+
+            color:white;
+        }
+
+        .submit-btn{
+
+            display:none;
+
+            border:none;
+
+            padding:12px 25px;
+
+            border-radius:11px;
+
+            background:#16a34a;
+
+            color:white;
+
+            font-weight:700;
+
+            cursor:pointer;
+
+            font-size:14px;
+        }
+
+        .back{
+
+            display:block;
+
+            text-align:center;
+
+            margin-top:25px;
+
+            color:#4f46e5;
+
+            text-decoration:none;
+
+            font-size:14px;
+
+            font-weight:700;
+        }
+
+        @media(max-width:600px){
+
+            body{
+                padding:15px;
+            }
+
+            .container{
+                padding:25px 20px;
+            }
+
+            .header{
+
+                flex-direction:column;
+
+                align-items:flex-start;
+
+                gap:15px;
+            }
+
+            .title{
+                font-size:24px;
+            }
+
+            .question-text{
+                font-size:18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="header">
+
+        <div class="title">
+
+            {{ chapter|title }}
+
+            <span>Quiz</span>
+
+        </div>
+
+        <div
+            class="timer"
+            id="timer">
+
+            02:00
+
+        </div>
+
+    </div>
+
+
+    <div class="progress-info">
+
+        <span id="questionCounter">
+
+            Question 1 of {{ questions|length }}
+
+        </span>
+
+        <span>
+            Quiz Progress
+        </span>
+
+    </div>
+
+
+    <div class="progress-bar">
+
+        <div
+            class="progress-fill"
+            id="progressFill">
+        </div>
+
+    </div>
+
+
+    <form
+        method="POST"
+        id="quizForm">
+
+
+        {% for q in questions %}
+
+        {% set question_number = loop.index %}
+
+
+        <div
+            class="question-box {% if loop.first %}active{% endif %}">
+
+
+            <div class="question-number">
+
+                QUESTION {{ question_number }}
+
+            </div>
+
+
+            <div class="question-text">
+
+                {{ q.question }}
+
+            </div>
+
+
+            {% for option in q.options %}
+
+            <label class="option">
+
+                <input
+                    type="radio"
+                    name="q{{ question_number }}"
+                    value="{{ option }}"
+                    required
+                >
+
+                {{ option }}
+
+            </label>
+
+            {% endfor %}
+
+
+        </div>
+
+        {% endfor %}
+
+
+        <div class="navigation">
+
+
+            <button
+                type="button"
+                class="nav-btn prev-btn"
+                id="prevBtn"
+                onclick="previousQuestion()">
+
+                ← Previous
+
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-btn next-btn"
+                id="nextBtn"
+                onclick="nextQuestion()">
+
+                Next →
+
+            </button>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+                id="submitBtn">
+
+                Submit Quiz 🚀
+
+            </button>
+
+
+        </div>
+
+
+    </form>
+
+
+    <a
+        href="javascript:history.back()"
+        class="back">
+
+        ← Back to Chapter
+
+    </a>
+
+
+</div>
+
+
+<script>
+
+let currentQuestion = 1;
+
+const questions =
+    document.querySelectorAll(".question-box");
+
+const totalQuestions =
+    questions.length;
+
+
+function showQuestion(number){
+
+    questions.forEach(function(question){
+
+        question.classList.remove("active");
+
+    });
+
+
+    questions[number - 1]
+        .classList.add("active");
+
+
+    document.getElementById(
+        "questionCounter"
+    ).innerText =
+        "Question " +
+        number +
+        " of " +
+        totalQuestions;
+
+
+    let progress =
+        (number / totalQuestions) * 100;
+
+
+    document.getElementById(
+        "progressFill"
+    ).style.width =
+        progress + "%";
+
+
+    if(number === 1){
+
+        document.getElementById(
+            "prevBtn"
+        ).style.visibility = "hidden";
+
+    }else{
+
+        document.getElementById(
+            "prevBtn"
+        ).style.visibility = "visible";
+
+    }
+
+
+    if(number === totalQuestions){
+
+        document.getElementById(
+            "nextBtn"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "submitBtn"
+        ).style.display = "block";
+
+    }else{
+
+        document.getElementById(
+            "nextBtn"
+        ).style.display = "block";
+
+
+        document.getElementById(
+            "submitBtn"
+        ).style.display = "none";
+
+    }
+
+}
+
+
+function nextQuestion(){
+
+    if(currentQuestion < totalQuestions){
+
+        currentQuestion++;
+
+        showQuestion(
+            currentQuestion
+        );
+
+    }
+
+}
+
+
+function previousQuestion(){
+
+    if(currentQuestion > 1){
+
+        currentQuestion--;
+
+        showQuestion(
+            currentQuestion
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+let timeLeft = 120;
+
+const timer =
+    document.getElementById("timer");
+
+
+const countdown =
+    setInterval(function(){
+
+        let minutes =
+            Math.floor(timeLeft / 60);
+
+        let seconds =
+            timeLeft % 60;
+
+
+        seconds =
+            seconds < 10
+            ? "0" + seconds
+            : seconds;
+
+
+        timer.innerText =
+            "0" +
+            minutes +
+            ":" +
+            seconds;
+
+
+        timeLeft--;
+
+
+        if(timeLeft < 0){
+
+            clearInterval(countdown);
+
+            timer.innerText =
+                "Time Up!";
+
+
+            document.getElementById(
+                "quizForm"
+            ).submit();
+
+        }
+
+    },1000);
+
+
+showQuestion(1);
+
+</script>
+
+
+</body>
+
+</html>

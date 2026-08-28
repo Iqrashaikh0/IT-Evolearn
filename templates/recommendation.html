@@ -1,0 +1,11 @@
+<h1>Study Recommendation</h1>
+
+<h2>{{ chapter }}</h2>
+
+<div>
+    {{ recommendation|safe }}
+</div>
+
+<a href="{{ url_for('notes', chapter=chapter) }}">Read Notes</a>
+<a href="{{ url_for('askai', chapter=chapter) }}">Ask AI</a>
+<a href="{{ url_for('quiz', chapter=chapter) }}">Retake Quiz</a>

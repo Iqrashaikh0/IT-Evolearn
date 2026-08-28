@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IT-EvoLearn | Junior College</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+
+/* =========================================
+   JUNIOR PAGE
+========================================= */
+
+.junior-hero {
+    padding: 70px 0;
+    background:
+        radial-gradient(circle at 85% 20%, rgba(103,232,249,0.25), transparent 25%),
+        radial-gradient(circle at 10% 80%, rgba(139,92,246,0.12), transparent 30%),
+        linear-gradient(135deg, #eef2ff, #f8fafc);
+}
+
+.junior-hero h1 {
+    font-size: 46px;
+    font-weight: 750;
+    color: #172554;
+}
+
+.junior-hero h1 span {
+    color: #6366f1;
+}
+
+.junior-hero p {
+    color: #64748b;
+    font-size: 17px;
+    max-width: 700px;
+    margin: 15px auto 25px;
+}
+
+
+/* =========================================
+   PROGRESS DASHBOARD
+========================================= */
+
+.junior-dashboard {
+    background: white;
+    border-radius: 22px;
+    padding: 28px;
+    box-shadow: 0 15px 40px rgba(30,41,59,0.1);
+    border: 1px solid #e5e7eb;
+}
+
+.junior-dashboard h4 {
+    color: #172554;
+    font-weight: 700;
+}
+
+.progress-value {
+    color: #6366f1;
+    font-size: 28px;
+    font-weight: 750;
+}
+
+.junior-progress {
+    height: 9px;
+    border-radius: 20px;
+}
+
+.junior-progress .progress-bar {
+    background: linear-gradient(90deg,#6366f1,#06b6d4);
+}
+
+
+/* =========================================
+   MINI STAT
+========================================= */
+
+.junior-stat {
+    background: #f8fafc;
+    border-radius: 14px;
+    padding: 15px;
+    border: 1px solid #eef2f7;
+}
+
+.junior-stat i {
+    color: #6366f1;
+    margin-right: 6px;
+}
+
+.junior-stat strong {
+    display: block;
+    color: #172554;
+    font-size: 19px;
+}
+
+.junior-stat small {
+    color: #64748b;
+}
+
+
+/* =========================================
+   AI RECOMMENDATION
+========================================= */
+
+.junior-ai {
+    margin-top: 18px;
+    padding: 15px;
+    background: linear-gradient(135deg,#eef2ff,#ecfeff);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.junior-ai-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    background: #fef3c7;
+    color: #d97706;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.junior-ai small {
+    color: #64748b;
+}
+
+.junior-ai strong {
+    display: block;
+    color: #312e81;
+}
+
+
+/* =========================================
+   SUBJECTS
+========================================= */
+
+.junior-subjects {
+    padding: 80px 0;
+    background: #f8faff;
+}
+
+.junior-title {
+    text-align: center;
+    color: #172554;
+    font-weight: 750;
+    font-size: 36px;
+}
+
+.junior-subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 45px;
+}
+
+
+/* =========================================
+   SUBJECT CARD
+========================================= */
+
+.junior-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    padding: 28px;
+    height: 100%;
+    transition: 0.3s;
+}
+
+.junior-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 35px rgba(30,41,59,0.1);
+}
+
+.junior-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    margin-bottom: 18px;
+}
+
+.blue {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.purple {
+    background: #ede9fe;
+    color: #7c3aed;
+}
+
+.cyan {
+    background: #cffafe;
+    color: #0891b2;
+}
+
+.green {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.orange {
+    background: #ffedd5;
+    color: #ea580c;
+}
+
+.red {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.junior-card h4 {
+    color: #172554;
+    font-weight: 700;
+}
+
+.junior-card p {
+    color: #64748b;
+    font-size: 14px;
+    min-height: 105px;
+}
+
+.junior-start {
+    border-radius: 9px;
+    padding: 9px 20px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   AI SECTION
+========================================= */
+
+.junior-ai-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg,#312e81,#4f46e5,#0891b2);
+    color: white;
+}
+
+.junior-ai-section h2 {
+    font-weight: 750;
+    font-size: 36px;
+}
+
+.junior-ai-section p {
+    max-width: 650px;
+    margin: 12px auto 25px;
+    opacity: 0.9;
+}
+
+
+/* =========================================
+   LEARNING PATH
+========================================= */
+
+.learning-path {
+    padding: 80px 0;
+    background: white;
+}
+
+.path-card {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.path-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.path-icon {
+    width: 43px;
+    height: 43px;
+    min-width: 43px;
+    border-radius: 12px;
+    background: #eef2ff;
+    color: #6366f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:768px) {
+
+    .junior-hero h1 {
+        font-size: 35px;
+    }
+
+    .junior-title {
+        font-size: 30px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     NAVBAR
+========================================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+
+<div class="container">
+
+<a class="navbar-brand"
+href="{{ url_for('home') }}">
+
+<i class="fa-solid fa-brain"></i>
+
+IT-EvoLearn
+
+</a>
+
+
+<button class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#menu">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+
+<div class="collapse navbar-collapse"
+id="menu">
+
+<ul class="navbar-nav ms-auto">
+
+<li class="nav-item">
+
+<a class="nav-link"
+href="{{ url_for('home') }}">
+
+Home
+
+</a>
+
+</li>
+
+
+<li class="nav-item">
+
+<a class="nav-link active"
+href="{{ url_for('junior') }}">
+
+Junior
+
+</a>
+
+</li>
+
+
+<li class="nav-item">
+
+<a class="nav-link"
+href="#subjects">
+
+Subjects
+
+</a>
+
+</li>
+
+
+<li class="nav-item">
+
+<a class="nav-link"
+href="#ai">
+
+AI Learning
+
+</a>
+
+</li>
+
+
+<li class="nav-item">
+
+<a class="btn login-btn"
+href="{{ url_for('login') }}">
+
+Login
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</nav>
+
+
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<section class="junior-hero">
+
+<div class="container">
+
+<div class="row align-items-center">
+
+
+<div class="col-lg-7 text-center text-lg-start">
+
+<div class="hero-badge">
+
+<i class="fa-solid fa-graduation-cap"></i>
+
+Junior College Learning
+
+</div>
+
+
+<h1>
+
+Build Skills.
+<span>Think Smarter.</span>
+
+</h1>
+
+
+<p>
+
+Explore programming, databases, Artificial Intelligence,
+robotics, cybersecurity and computer networks through
+an adaptive learning experience for Classes 11–12.
+
+</p>
+
+
+<a href="#subjects"
+class="btn btn-primary btn-lg">
+
+<i class="fa-solid fa-rocket"></i>
+
+Start Learning
+
+</a>
+
+</div>
+
+
+
+<!-- Dashboard -->
+
+<div class="col-lg-5 mt-4 mt-lg-0">
+
+<div class="junior-dashboard">
+
+<div class="d-flex justify-content-between align-items-center">
+
+<div>
+
+<small class="text-muted">
+
+Your Progress
+
+</small>
+
+<h4>
+
+Junior Level
+
+</h4>
+
+</div>
+
+
+<div class="progress-value">
+
+48%
+
+</div>
+
+</div>
+
+
+<div class="progress junior-progress mt-3">
+
+<div class="progress-bar"
+style="width:48%">
+
+</div>
+
+</div>
+
+
+<div class="row g-3 mt-3">
+
+<div class="col-6">
+
+<div class="junior-stat">
+
+<i class="fa-solid fa-book"></i>
+
+<strong>12</strong>
+
+<small>Topics</small>
+
+</div>
+
+</div>
+
+
+<div class="col-6">
+
+<div class="junior-stat">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<strong>81%</strong>
+
+<small>Quiz Accuracy</small>
+
+</div>
+
+</div>
+
+
+<div class="col-6">
+
+<div class="junior-stat">
+
+<i class="fa-solid fa-code"></i>
+
+<strong>6</strong>
+
+<small>Projects</small>
+
+</div>
+
+</div>
+
+
+<div class="col-6">
+
+<div class="junior-stat">
+
+<i class="fa-solid fa-fire"></i>
+
+<strong>5 Days</strong>
+
+<small>Streak</small>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="junior-ai">
+
+<div class="junior-ai-icon">
+
+<i class="fa-solid fa-lightbulb"></i>
+
+</div>
+
+<div>
+
+<small>AI Recommendation</small>
+
+<strong>Practice SQL Queries</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================
+     SUBJECTS
+========================================= -->
+
+<section class="junior-subjects"
+id="subjects">
+
+<div class="container">
+
+<h2 class="junior-title">
+
+Explore Junior IT Subjects
+
+</h2>
+
+<p class="junior-subtitle">
+
+Learn → Practice → Analyze → Improve
+
+</p>
+
+
+<div class="row g-4">
+
+
+<!-- C -->
+
+<div class="col-lg-4 col-md-6">
+
+<div class="junior-card">
+
+<div class="junior-icon blue">
+
+<i class="fa-solid fa-code"></i>
+
+</div>
+
+<h4>C Programming</h4>
+
+<p>
+
+C basics, syntax, variables, loops,
+functions and programming projects.
+
+</p>
+
+<a href="{{ url_for('cprogramming') }}"
+class="btn btn-primary junior-start">
+
+Start Learning
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- DBMS -->
+
+<div class="col-lg-4 col-md-6">
+
+<div class="junior-card">
+
+<div class="junior-icon green">
+
+<i class="fa-solid fa-database"></i>
+
+</div>
+
+<h4>Database Management System</h4>
+
+<p>
+
+Learn databases, tables, SQL queries,
+keys and database projects.
+
+</p>
+
+<a href="{{ url_for('dbms') }}"
+class="btn btn-primary junior-start">
+
+Start Learning
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- AI -->
+
+<div class="col-lg-4 col-md-6">
+
+<div class="junior-card">
+
+<div class="junior-icon purple">
+
+<i class="fa-solid fa-robot"></i>
+
+</div>
+
+<h4>Artificial Intelligence</h4>
+
+<p>
+
+Explore AI basics, machine learning,
+ChatGPT, image AI and real-world projects.
+
+</p>
+
+<a href="{{ url_for('ai') }}"
+class="btn btn-primary junior-start">
+
+Start Learning
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- Robotics -->
+
+<div class="col-lg-4 col-md-6">
+
+<div class="junior-card">
+
+<div class="junior-icon orange">
+
+<i class="fa-solid fa-microchip"></i>
+
+</div>
+
+<h4>Robotics</h4>
+
+<p>
+
+Learn sensors, Arduino, motors,
+robot programming and projects.
+
+</p>
+
+<a href="{{ url_for('robotics') }}"
+class="btn btn-primary junior-start">
+
+Start Learning
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- Cyber -->
+
+<div class="col-lg-4 col-md-6">
+
+<div class="junior-card">
+
+<div class="junior-icon red">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+</div>
+
+<h4>Cyber Security</h4>
+
+<p>
+
+Understand passwords, phishing,
+ethical hacking and cyber laws.
+
+</p>
+
+<a href="{{ url_for('cyber') }}"
+class="btn btn-primary junior-start">
+
+Start Learning
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- Networks -->
+
+<div class="col-lg-4 col-md-6">
+
+<div class="junior-card">
+
+<div class="junior-icon cyan">
+
+<i class="fa-solid fa-network-wired"></i>
+
+</div>
+
+<h4>Computer Networks</h4>
+
+<p>
+
+Explore LAN, WAN, IP addresses,
+protocols and internet concepts.
+
+</p>
+
+<a href="{{ url_for('computernetwork') }}"
+class="btn btn-primary junior-start">
+
+Start Learning
+
+<i class="fa-solid fa-arrow-right"></i>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================
+     AI LEARNING
+========================================= -->
+
+<section class="junior-ai-section"
+id="ai">
+
+<div class="container text-center">
+
+<div class="about-icon mx-auto"
+style="background:rgba(255,255,255,0.15); color:white;">
+
+<i class="fa-solid fa-brain"></i>
+
+</div>
+
+
+<h2>
+
+Your AI Learning Assistant
+
+</h2>
+
+
+<p>
+
+Ask questions, understand difficult concepts,
+generate explanations and receive personalized
+learning recommendations with AI.
+
+</p>
+
+
+<a href="{{ url_for('askai', chapter='junior') }}"
+class="btn btn-light btn-lg">
+
+<i class="fa-solid fa-comments"></i>
+
+Talk to AI
+
+</a>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================
+     LEARNING PATH
+========================================= -->
+
+<section class="learning-path">
+
+<div class="container">
+
+<div class="row align-items-center">
+
+
+<div class="col-lg-6">
+
+<h2 class="junior-title text-start">
+
+Your Adaptive Learning Path
+
+</h2>
+
+<p class="text-muted mt-3">
+
+IT-EvoLearn uses your learning performance
+to guide you toward the next topic that
+needs your attention.
+
+</p>
+
+</div>
+
+
+<div class="col-lg-6">
+
+<div class="path-card">
+
+<div class="path-item">
+
+<div class="path-icon">
+
+<i class="fa-solid fa-book-open"></i>
+
+</div>
+
+<div>
+
+<strong>Learn Concepts</strong>
+
+<small class="d-block text-muted">
+
+Understand the fundamentals.
+
+</small>
+
+</div>
+
+</div>
+
+
+<div class="path-item">
+
+<div class="path-icon">
+
+<i class="fa-solid fa-pen-to-square"></i>
+
+</div>
+
+<div>
+
+<strong>Practice</strong>
+
+<small class="d-block text-muted">
+
+Test your knowledge with quizzes.
+
+</small>
+
+</div>
+
+</div>
+
+
+<div class="path-item">
+
+<div class="path-icon">
+
+<i class="fa-solid fa-chart-line"></i>
+
+</div>
+
+<div>
+
+<strong>Analyze Performance</strong>
+
+<small class="d-block text-muted">
+
+Identify strengths and weak areas.
+
+</small>
+
+</div>
+
+</div>
+
+
+<div class="path-item mb-0">
+
+<div class="path-icon">
+
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+
+</div>
+
+<div>
+
+<strong>Get Recommendations</strong>
+
+<small class="d-block text-muted">
+
+Continue with the most relevant topic.
+
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-md-6">
+
+<h4>
+
+<i class="fa-solid fa-brain"></i>
+
+IT-EvoLearn
+
+</h4>
+
+<p>
+
+AI-Powered Continuous Adaptive Learning System
+for Information Technology.
+
+</p>
+
+</div>
+
+
+<div class="col-md-6 text-md-end">
+
+<p>© 2026 IT-EvoLearn</p>
+
+<p>
+M.Sc. Information Technology | University of Mumbai
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</footer>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

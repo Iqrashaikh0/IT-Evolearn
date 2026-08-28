@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Quiz Result - IT-EvoLearn
+    </title>
+
+
+    <style>
+
+        *{
+
+            margin:0;
+
+            padding:0;
+
+            box-sizing:border-box;
+
+            font-family:Arial,sans-serif;
+
+        }
+
+
+        body{
+
+            min-height:100vh;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(96,165,250,.25),
+                    transparent 30%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #eef5ff,
+                    #e0e7ff
+                );
+
+            padding:30px;
+
+        }
+
+
+        .container{
+
+            width:850px;
+
+            max-width:100%;
+
+            margin:auto;
+
+            background:white;
+
+            padding:35px;
+
+            border-radius:22px;
+
+            box-shadow:
+                0 15px 45px rgba(30,41,59,.12);
+
+        }
+
+
+        /* ================= HEADER ================= */
+
+        .result-header{
+
+            text-align:center;
+
+            margin-bottom:30px;
+
+        }
+
+
+        .icon{
+
+            font-size:60px;
+
+            margin-bottom:10px;
+
+        }
+
+
+        h1{
+
+            color:#172554;
+
+            margin-bottom:8px;
+
+        }
+
+
+        .chapter{
+
+            color:#64748b;
+
+            font-size:17px;
+
+        }
+
+
+        /* ================= SCORE ================= */
+
+        .score-box{
+
+            text-align:center;
+
+            background:#eef2ff;
+
+            padding:25px;
+
+            border-radius:18px;
+
+            margin-bottom:30px;
+
+        }
+
+
+        .score{
+
+            font-size:48px;
+
+            font-weight:800;
+
+            color:#4f46e5;
+
+        }
+
+
+        .percentage{
+
+            font-size:22px;
+
+            color:#334155;
+
+            margin-top:8px;
+
+        }
+
+
+        /* ================= MESSAGE ================= */
+
+        .message{
+
+            text-align:center;
+
+            font-size:20px;
+
+            font-weight:700;
+
+            margin-bottom:30px;
+
+        }
+
+
+        .excellent{
+
+            color:#16a34a;
+
+        }
+
+
+        .good{
+
+            color:#2563eb;
+
+        }
+
+
+        .average{
+
+            color:#f59e0b;
+
+        }
+
+
+        .poor{
+
+            color:#dc2626;
+
+        }
+
+
+        /* ================= QUESTIONS ================= */
+
+        .review-title{
+
+            color:#172554;
+
+            margin-bottom:20px;
+
+            font-size:22px;
+
+        }
+
+
+        .result-card{
+
+            padding:20px;
+
+            border-radius:15px;
+
+            margin-bottom:18px;
+
+            border:2px solid #e5e7eb;
+
+        }
+
+
+        .correct-card{
+
+            background:#f0fdf4;
+
+            border-color:#86efac;
+
+        }
+
+
+        .wrong-card{
+
+            background:#fef2f2;
+
+            border-color:#fca5a5;
+
+        }
+
+
+        .question{
+
+            font-size:17px;
+
+            font-weight:700;
+
+            color:#172554;
+
+            margin-bottom:15px;
+
+            line-height:1.5;
+
+        }
+
+
+        .answer{
+
+            margin:8px 0;
+
+            padding:10px 12px;
+
+            border-radius:8px;
+
+            font-size:15px;
+
+        }
+
+
+        .your-answer{
+
+            background:#f8fafc;
+
+            color:#334155;
+
+        }
+
+
+        .correct-answer{
+
+            background:#dcfce7;
+
+            color:#166534;
+
+            font-weight:600;
+
+        }
+
+
+        .wrong-answer{
+
+            background:#fee2e2;
+
+            color:#991b1b;
+
+        }
+
+
+        .status{
+
+            font-weight:800;
+
+            margin-top:12px;
+
+            font-size:15px;
+
+        }
+
+
+        .status.correct{
+
+            color:#16a34a;
+
+        }
+
+
+        .status.wrong{
+
+            color:#dc2626;
+
+        }
+
+
+        /* ================= BUTTONS ================= */
+
+        .buttons{
+
+            display:flex;
+
+            justify-content:center;
+
+            gap:15px;
+
+            flex-wrap:wrap;
+
+            margin-top:30px;
+
+        }
+
+
+        .btn{
+
+            padding:12px 22px;
+
+            border-radius:10px;
+
+            text-decoration:none;
+
+            color:white;
+
+            font-weight:700;
+
+        }
+
+
+        .retry{
+
+            background:#16a34a;
+
+        }
+
+
+        .home{
+
+            background:#4f46e5;
+
+        }
+
+
+        .dashboard{
+
+            background:#0f766e;
+
+        }
+
+
+        .btn:hover{
+
+            opacity:.9;
+
+        }
+
+
+        /* ================= ERROR ================= */
+
+        .error{
+
+            text-align:center;
+
+            color:#dc2626;
+
+            background:#fee2e2;
+
+            padding:15px;
+
+            border-radius:10px;
+
+            margin-bottom:20px;
+
+        }
+
+
+        @media(max-width:600px){
+
+            body{
+
+                padding:15px;
+
+            }
+
+
+            .container{
+
+                padding:25px 20px;
+
+            }
+
+
+            .score{
+
+                font-size:40px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="result-header">
+
+        <div class="icon">
+
+            🏆
+
+        </div>
+
+
+        <h1>
+
+            Quiz Completed!
+
+        </h1>
+
+
+        <div class="chapter">
+
+            {{ chapter|title }}
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= ERROR ================= -->
+
+    {% if error %}
+
+    <div class="error">
+
+        {{ error }}
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- ================= SCORE ================= -->
+
+    <div class="score-box">
+
+        <div class="score">
+
+            {{ score }} / {{ total }}
+
+        </div>
+
+
+        <div class="percentage">
+
+            Percentage: {{ percentage }}%
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= MESSAGE ================= -->
+
+    {% if percentage >= 80 %}
+
+    <div class="message excellent">
+
+        🎉 Excellent Performance!
+
+    </div>
+
+    {% elif percentage >= 60 %}
+
+    <div class="message good">
+
+        👍 Good Job! Keep Learning!
+
+    </div>
+
+    {% elif percentage >= 40 %}
+
+    <div class="message average">
+
+        📚 Keep Practicing!
+
+    </div>
+
+    {% else %}
+
+    <div class="message poor">
+
+        💪 Don't Give Up! Try Again!
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- ================= REVIEW ================= -->
+
+    {% if results %}
+
+    <h2 class="review-title">
+
+        📋 Answer Review
+
+    </h2>
+
+
+    {% for result in results %}
+
+    <div
+        class="result-card
+        {% if result.is_correct %}
+            correct-card
+        {% else %}
+            wrong-card
+        {% endif %}"
+    >
+
+
+        <div class="question">
+
+            {{ loop.index }}.
+
+            {{ result.question }}
+
+        </div>
+
+
+
+        {% if result.user_answer %}
+
+        <div class="answer your-answer">
+
+            <strong>Your Answer:</strong>
+
+            {{ result.user_answer }}
+
+        </div>
+
+        {% else %}
+
+        <div class="answer wrong-answer">
+
+            <strong>Your Answer:</strong>
+
+            Not Answered
+
+        </div>
+
+        {% endif %}
+
+
+
+        <div class="answer correct-answer">
+
+            <strong>Correct Answer:</strong>
+
+            {{ result.correct_answer }}
+
+        </div>
+
+
+
+        {% if result.is_correct %}
+
+        <div class="status correct">
+
+            ✅ Correct
+
+        </div>
+
+        {% else %}
+
+        <div class="status wrong">
+
+            ❌ Incorrect
+
+        </div>
+
+        {% endif %}
+
+
+    </div>
+
+    {% endfor %}
+
+    {% endif %}
+
+
+
+    <!-- ================= BUTTONS ================= -->
+
+    <div class="buttons">
+
+
+        <a
+            href="{{ url_for('quiz', chapter=chapter) }}"
+            class="btn retry">
+
+            🔄 Retry Quiz
+
+        </a>
+
+
+        <a
+            href="{{ url_for('home') }}"
+            class="btn home">
+
+            🏠 Home
+
+        </a>
+
+
+        <a
+            href="{{ url_for('dashboard') }}"
+            class="btn dashboard">
+
+            📊 Dashboard
+
+        </a>
+
+
+    </div>
+</div>
+</body>
+</html>
