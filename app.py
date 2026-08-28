@@ -54,7 +54,10 @@ if not mongo_uri:
         "MONGO_URI environment variable is not set."
     )
 
-client = MongoClient(mongo_uri)
+client = MongoClient(
+    mongo_uri,
+    serverSelectionTimeoutMS=5000
+)
 
 db = client["itevolearn"]
 
@@ -95,12 +98,35 @@ def login():
             ""
         )
 
-        # Find user by email
-        user = users_collection.find_one({
-            "email": email
-        })
+        # Basic validation
+        if not email or not password:
 
-        # Check user
+            flash(
+                "Please enter your email and password."
+            )
+
+            return redirect(
+                url_for("login")
+            )
+
+        try:
+
+            # Find user by email
+            user = users_collection.find_one({
+                "email": email
+            })
+
+        except Exception:
+
+            flash(
+                "Unable to connect to the database. Please try again."
+            )
+
+            return redirect(
+                url_for("login")
+            )
+
+        # User not found
         if not user:
 
             flash(
@@ -111,9 +137,24 @@ def login():
                 url_for("login")
             )
 
-        # Check password
+        # Password verification
+        stored_password = user.get(
+            "password",
+            ""
+        )
+
+        if not stored_password:
+
+            flash(
+                "Invalid email or password."
+            )
+
+            return redirect(
+                url_for("login")
+            )
+
         if not check_password_hash(
-            user["password"],
+            stored_password,
             password
         ):
 
@@ -125,7 +166,10 @@ def login():
                 url_for("login")
             )
 
-        # Login successful
+        # -------------------------------------------------
+        # LOGIN SUCCESS
+        # -------------------------------------------------
+
         session["user_id"] = str(
             user["_id"]
         )
@@ -180,11 +224,6 @@ def register():
             ""
         ).strip().lower()
 
-        level = request.form.get(
-            "level",
-            ""
-        ).strip()
-
         password = request.form.get(
             "password",
             ""
@@ -195,12 +234,18 @@ def register():
             ""
         )
 
+        # Optional level
+        level = request.form.get(
+            "level",
+            ""
+        ).strip()
+
 
         # -------------------------------------------------
         # VALIDATION
         # -------------------------------------------------
 
-        if not name or not email or not level or not password:
+        if not name or not email or not password:
 
             flash(
                 "Please fill all required fields."
@@ -211,6 +256,7 @@ def register():
             )
 
 
+        # Password match
         if password != confirm_password:
 
             flash(
@@ -226,9 +272,21 @@ def register():
         # CHECK EXISTING USER
         # -------------------------------------------------
 
-        existing_user = users_collection.find_one({
-            "email": email
-        })
+        try:
+
+            existing_user = users_collection.find_one({
+                "email": email
+            })
+
+        except Exception:
+
+            flash(
+                "Unable to connect to the database. Please try again."
+            )
+
+            return redirect(
+                url_for("register")
+            )
 
 
         if existing_user:
@@ -252,10 +310,10 @@ def register():
 
 
         # -------------------------------------------------
-        # SAVE USER
+        # SAVE USER TO MONGODB
         # -------------------------------------------------
 
-        users_collection.insert_one({
+        user_data = {
 
             "name": name,
 
@@ -265,8 +323,29 @@ def register():
 
             "password": hashed_password
 
-        })
+        }
 
+
+        try:
+
+            users_collection.insert_one(
+                user_data
+            )
+
+        except Exception:
+
+            flash(
+                "Registration failed. Please try again."
+            )
+
+            return redirect(
+                url_for("register")
+            )
+
+
+        # -------------------------------------------------
+        # SUCCESS
+        # -------------------------------------------------
 
         flash(
             "Registration successful! You can now login."
@@ -289,7 +368,10 @@ def register():
 @app.route("/dashboard")
 def dashboard():
 
-    # User must be logged in
+    # -----------------------------------------------------
+    # LOGIN REQUIRED
+    # -----------------------------------------------------
+
     if "user_id" not in session:
 
         flash(
@@ -302,19 +384,24 @@ def dashboard():
 
 
     return render_template(
+
         "dashboard.html",
+
         user_name=session.get(
             "user_name",
             ""
         ),
+
         user_email=session.get(
             "user_email",
             ""
         ),
+
         user_level=session.get(
             "user_level",
             ""
         )
+
     )
 
 
@@ -614,7 +701,6 @@ def quiz(chapter):
 
     # =====================================================
     # GET REQUEST
-    # Generate quiz only ONCE
     # =====================================================
 
     if request.method == "GET":
@@ -623,7 +709,7 @@ def quiz(chapter):
             chapter
         )
 
-        # If quiz generation fails
+        # Quiz generation failed
         if not questions:
 
             return render_template(
@@ -638,6 +724,7 @@ def quiz(chapter):
 
         # Save generated quiz in session
         session["quiz_questions"] = questions
+
         session["quiz_chapter"] = chapter
 
         return render_template(
@@ -649,7 +736,6 @@ def quiz(chapter):
 
     # =====================================================
     # POST REQUEST
-    # Use SAME questions from session
     # =====================================================
 
     questions = session.get(
@@ -663,7 +749,7 @@ def quiz(chapter):
     )
 
 
-    # If session quiz is missing
+    # If quiz missing
     if not questions:
 
         return redirect(
@@ -688,14 +774,12 @@ def quiz(chapter):
         start=1
     ):
 
-        # Student answer
         user_answer = request.form.get(
             f"q{i}",
             ""
         ).strip()
 
 
-        # Correct answer
         correct_answer = str(
             question.get(
                 "answer",
@@ -704,7 +788,6 @@ def quiz(chapter):
         ).strip()
 
 
-        # Check answer
         is_correct = (
             user_answer == correct_answer
         )
@@ -715,7 +798,6 @@ def quiz(chapter):
             score += 1
 
 
-        # Store result for result page
         results.append({
 
             "question": question.get(
@@ -757,7 +839,7 @@ def quiz(chapter):
 
 
     # =====================================================
-    # CLEAR OLD QUIZ
+    # CLEAR QUIZ SESSION
     # =====================================================
 
     session.pop(
@@ -772,10 +854,11 @@ def quiz(chapter):
 
 
     # =====================================================
-    # RESULT PAGE
+    # RESULT
     # =====================================================
 
     return render_template(
+
         "result.html",
 
         score=score,
@@ -789,6 +872,7 @@ def quiz(chapter):
         results=results,
 
         error=None
+
     )
 
 
