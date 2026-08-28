@@ -3,6 +3,10 @@ import markdown
 import os
 from dotenv import load_dotenv
 
+from pymongo import MongoClient
+from werkzeug.security import generate_password_hash, check_password_hash
+
+
 # =========================================================
 # AI MODULES
 # =========================================================
@@ -40,6 +44,24 @@ app.secret_key = os.getenv(
 
 
 # =========================================================
+# MONGODB
+# =========================================================
+
+mongo_uri = os.getenv("MONGO_URI")
+
+if not mongo_uri:
+    raise RuntimeError(
+        "MONGO_URI environment variable is not set."
+    )
+
+client = MongoClient(mongo_uri)
+
+db = client["itevolearn"]
+
+users_collection = db["users"]
+
+
+# =========================================================
 # HOME
 # =========================================================
 
@@ -55,8 +77,81 @@ def home():
 # LOGIN
 # =========================================================
 
-@app.route("/login")
+@app.route(
+    "/login",
+    methods=["GET", "POST"]
+)
 def login():
+
+    if request.method == "POST":
+
+        email = request.form.get(
+            "email",
+            ""
+        ).strip().lower()
+
+        password = request.form.get(
+            "password",
+            ""
+        )
+
+        # Find user by email
+        user = users_collection.find_one({
+            "email": email
+        })
+
+        # Check user
+        if not user:
+
+            flash(
+                "Invalid email or password."
+            )
+
+            return redirect(
+                url_for("login")
+            )
+
+        # Check password
+        if not check_password_hash(
+            user["password"],
+            password
+        ):
+
+            flash(
+                "Invalid email or password."
+            )
+
+            return redirect(
+                url_for("login")
+            )
+
+        # Login successful
+        session["user_id"] = str(
+            user["_id"]
+        )
+
+        session["user_name"] = user.get(
+            "name",
+            ""
+        )
+
+        session["user_email"] = user.get(
+            "email",
+            ""
+        )
+
+        session["user_level"] = user.get(
+            "level",
+            ""
+        )
+
+        flash(
+            "Login successful!"
+        )
+
+        return redirect(
+            url_for("dashboard")
+        )
 
     return render_template(
         "login.html"
@@ -75,13 +170,46 @@ def register():
 
     if request.method == "POST":
 
-        name = request.form.get("name")
-        email = request.form.get("email")
-        level = request.form.get("level")
-        password = request.form.get("password")
-        confirm_password = request.form.get(
-            "confirm_password"
+        name = request.form.get(
+            "name",
+            ""
+        ).strip()
+
+        email = request.form.get(
+            "email",
+            ""
+        ).strip().lower()
+
+        level = request.form.get(
+            "level",
+            ""
+        ).strip()
+
+        password = request.form.get(
+            "password",
+            ""
         )
+
+        confirm_password = request.form.get(
+            "confirm_password",
+            ""
+        )
+
+
+        # -------------------------------------------------
+        # VALIDATION
+        # -------------------------------------------------
+
+        if not name or not email or not level or not password:
+
+            flash(
+                "Please fill all required fields."
+            )
+
+            return redirect(
+                url_for("register")
+            )
+
 
         if password != confirm_password:
 
@@ -93,6 +221,53 @@ def register():
                 url_for("register")
             )
 
+
+        # -------------------------------------------------
+        # CHECK EXISTING USER
+        # -------------------------------------------------
+
+        existing_user = users_collection.find_one({
+            "email": email
+        })
+
+
+        if existing_user:
+
+            flash(
+                "Email already registered."
+            )
+
+            return redirect(
+                url_for("register")
+            )
+
+
+        # -------------------------------------------------
+        # HASH PASSWORD
+        # -------------------------------------------------
+
+        hashed_password = generate_password_hash(
+            password
+        )
+
+
+        # -------------------------------------------------
+        # SAVE USER
+        # -------------------------------------------------
+
+        users_collection.insert_one({
+
+            "name": name,
+
+            "email": email,
+
+            "level": level,
+
+            "password": hashed_password
+
+        })
+
+
         flash(
             "Registration successful! You can now login."
         )
@@ -100,6 +275,7 @@ def register():
         return redirect(
             url_for("login")
         )
+
 
     return render_template(
         "register.html"
@@ -113,8 +289,50 @@ def register():
 @app.route("/dashboard")
 def dashboard():
 
+    # User must be logged in
+    if "user_id" not in session:
+
+        flash(
+            "Please login to access the dashboard."
+        )
+
+        return redirect(
+            url_for("login")
+        )
+
+
     return render_template(
-        "dashboard.html"
+        "dashboard.html",
+        user_name=session.get(
+            "user_name",
+            ""
+        ),
+        user_email=session.get(
+            "user_email",
+            ""
+        ),
+        user_level=session.get(
+            "user_level",
+            ""
+        )
+    )
+
+
+# =========================================================
+# LOGOUT
+# =========================================================
+
+@app.route("/logout")
+def logout():
+
+    session.clear()
+
+    flash(
+        "You have been logged out."
+    )
+
+    return redirect(
+        url_for("login")
     )
 
 
@@ -439,7 +657,6 @@ def quiz(chapter):
         []
     )
 
-
     saved_chapter = session.get(
         "quiz_chapter",
         chapter
@@ -667,4 +884,3 @@ if __name__ == "__main__":
         port=5000,
         debug=True
     )
-
